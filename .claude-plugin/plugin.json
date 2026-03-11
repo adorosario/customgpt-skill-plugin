@@ -1,0 +1,9 @@
+{
+  "name": "customgpt-skill-plugin",
+  "version": "1.0.0",
+  "description": "Semantic search for your codebase using CustomGPT.ai. Fully skill-based — no Node.js, no Python, no dependencies. Requires only curl (pre-installed on macOS, Linux, Windows 10+).",
+  "author": { "name": "CustomGPT.ai" },
+  "license": "MIT",
+  "repository": "https://github.com/authentichamza/customgpt-skill-plugin",
+  "skills": "../skills/"
+}
