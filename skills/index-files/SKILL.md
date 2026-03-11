@@ -1,5 +1,4 @@
 ---
-name: index-files
 description: Index specific files or a directory into an existing CustomGPT.ai agent for RAG search. Supports explicit file lists, directory paths, or the current folder. Respects file extension whitelist and exclusion rules.
 triggers:
   - "index"
