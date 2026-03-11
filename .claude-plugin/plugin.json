@@ -1,5 +1,5 @@
 {
-  "name": "customgpt-skill-plugin",
+  "name": "customgpt-ai-rag",
   "version": "1.0.0",
   "description": "Semantic search for your codebase using CustomGPT.ai. Fully skill-based — no Node.js, no Python, no dependencies. Requires only curl (pre-installed on macOS, Linux, Windows 10+).",
   "author": { "name": "CustomGPT.ai" },

@@ -1,5 +1,5 @@
 {
-  "name": "authentichamza-customgpt-skill-plugin",
+  "name": "authentichamza-customgpt-ai-rag",
   "owner": {
     "name": "CustomGPT.ai",
     "email": "support@customgpt.ai"
@@ -10,7 +10,7 @@
   },
   "plugins": [
     {
-      "name": "customgpt-skill-plugin",
+      "name": "customgpt-ai-rag",
       "source": "./",
       "description": "Semantic search for your codebase using CustomGPT.ai. Fully skill-based — no Node.js, no Python, no dependencies. Requires only curl (pre-installed on macOS, Linux, Windows 10+).",
       "version": "1.0.0",
