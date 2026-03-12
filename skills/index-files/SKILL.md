@@ -101,7 +101,9 @@ Use the first match. If not found, stop and tell the user.
 
 **Config/Data:** `.json` `.jsonc` `.yaml` `.yml` `.toml` `.xml` `.ini` `.cfg` `.conf` `.env.example`
 
-**Docs:** `.md` `.mdx` `.rst` `.txt` `.csv` `.tsv` `.pdf` `.docx` `.xlsx` `.pptx`
+**Docs:** `.md` `.mdx` `.rst` `.txt` `.csv` `.tsv` `.pdf` `.docx` `.xlsx` `.pptx`, 'doc', `odt`, `txt`
+
+**Images** `jpg`, `jpeg`, `png`, `webp`
 
 Exclude: `.git/`, `node_modules/`, `__pycache__/`, `.next/`, `dist/`, `build/`, `.cache/`, `vendor/`, `coverage/`, `.venv/`, `venv/`
 
@@ -109,10 +111,31 @@ Tell the user the file count before uploading.
 
 ---
 
-## Step 4 — Upload Each File
+## Step 4 — Vision Check (Images Only)
+
+If any files to be uploaded are images (`.jpg`, `.jpeg`, `.png`, `.webp`), ask the user before uploading:
+
+> "Image files detected. Do you want to use AI Vision for image processing? (yes/no)"
+
+If **yes**, also ask:
+> "Compress images before vision processing? (yes/no)"
+
+Set the following form fields for image uploads based on the answers:
+- `is_vision_enabled=true`
+- `ocr_mode=2` (AI Vision)
+- `is_vision_compress_image=true` or `false`
+
+If **no**, omit all three fields (defaults to no vision processing).
+
+Non-image files always omit these fields.
+
+---
+
+## Step 5 — Upload Each File
 
 For each eligible file, compute `REL` as its path relative to `indexed_folder` (strip the `indexed_folder/` prefix). Then run:
 
+**For non-image files:**
 ```bash
 curl -s --request POST \
   --url "https://app.customgpt.ai/api/v1/projects/${AGENT_ID}/sources" \
@@ -120,11 +143,22 @@ curl -s --request POST \
   --form "file=@${ABSOLUTE_PATH};filename=${REL}"
 ```
 
+**For image files with vision enabled:**
+```bash
+curl -s --request POST \
+  --url "https://app.customgpt.ai/api/v1/projects/${AGENT_ID}/sources" \
+  --header "Authorization: Bearer ${API_KEY}" \
+  --form "file=@${ABSOLUTE_PATH};filename=${REL}" \
+  --form "is_vision_enabled=true" \
+  --form "ocr_mode=2" \
+  --form "is_vision_compress_image=${COMPRESS}"
+```
+
 Read the HTTP status from the response. HTTP 200 or 201 = success. Report each result: `OK: {REL}` or `FAILED [{status}]: {REL}`.
 
 ---
 
-## Step 5 — Update Freshness Timestamp
+## Step 6 — Update Freshness Timestamp
 
 ```bash
 touch "${META_FILE_PATH}"
@@ -132,7 +166,7 @@ touch "${META_FILE_PATH}"
 
 ---
 
-## Step 6 — Report
+## Step 7 — Report
 
 > "Indexed {N} file(s) into agent {agent_id}. Uploaded: {N}, Failed: {F}
 > Use `/query-agent` to search or `/refresh-agent` for a full re-sync."
