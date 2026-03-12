@@ -1,3 +1,17 @@
+---
+description: Delete all pages from the CustomGPT.ai agent and re-sync the entire indexed folder from scratch.
+triggers:
+  - "reindex"
+  - "re-index"
+  - "reindex skills"
+  - "refresh agent"
+  - "refresh the agent"
+  - "re-sync"
+  - "resync"
+  - "full reindex"
+  - "full re-index"
+---
+
 # refresh-agent
 
 Delete all files from the agent and re-sync from the same indexed folder. Use after making changes to the codebase.

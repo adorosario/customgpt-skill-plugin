@@ -29,8 +29,6 @@ triggers:
   - "upload to the agent"
   - "upload these files"
   - "upload to customgpt"
-  - "re-index"
-  - "reindex"
   - "index and"
 ---
 
